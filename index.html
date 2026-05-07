@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陈墨 — 平面设计师</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f5f7;
+            --bg-white: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --text-tertiary: #6e6e73;
+            --accent: #0071e3;
+            --accent-hover: #0077ed;
+            --divider: #d2d2d7;
+            --surface: #fafafa;
+            --radius: 18px;
+            --radius-lg: 28px;
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.47059;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 52px;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            z-index: 9999;
+            transition: background 0.3s var(--transition);
+        }
+
+        .nav-inner {
+            max-width: 1024px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .nav-logo {
+            font-size: 21px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-primary);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .nav-cta {
+            padding: 6px 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 980px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(0, 113, 227, 0.08);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s var(--transition) 0.2s both;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: #34c759;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s var(--transition) 0.4s both;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, #1d1d1f 0%, #434344 50%, #1d1d1f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(19px, 3vw, 28px);
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s var(--transition) 0.6s both;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            animation: fadeInUp 0.8s var(--transition) 0.8s both;
+        }
+
+        .btn-primary {
+            padding: 14px 32px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 980px;
+            font-size: 17px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--accent);
+            border: none;
+            border-radius: 980px;
+            font-size: 17px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-secondary:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== SECTION COMMON ===== */
+        .section {
+            padding: 120px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 21px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* ===== WORKS GRID ===== */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .work-card {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: var(--bg-white);
+            cursor: pointer;
+            transition: transform 0.5s var(--transition), box-shadow 0.5s var(--transition);
+            aspect-ratio: 4/3;
+        }
+
+        .work-card:nth-child(3) {
+            grid-column: span 2;
+            aspect-ratio: 21/9;
+        }
+
+        .work-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+
+        .work-card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s var(--transition);
+        }
+
+        .work-card:hover .work-card-image {
+            transform: scale(1.05);
+        }
+
+        .work-card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+            background: linear-gradient(transparent 0%, rgba(0,0,0,0.6) 100%);
+            color: white;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s var(--transition);
+        }
+
+        .work-card:hover .work-card-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .work-card-tag {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+
+        .work-card-title {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .work-card-desc {
+            font-size: 15px;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        /* ===== SERVICES ===== */
+        .services-section {
+            background: var(--bg-white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .service-card {
+            padding: 48px 32px;
+            border-radius: var(--radius);
+            background: var(--surface);
+            transition: all 0.4s var(--transition);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            background: var(--bg-white);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+            transform: translateY(-4px);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background: linear-gradient(135deg, #f5f5f7, #e8e8ed);
+            border-radius: 16px;
+        }
+
+        .service-title {
+            font-size: 21px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .service-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-content h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .about-content p {
+            font-size: 19px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 48px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--divider);
+        }
+
+        .stat-item {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-section {
+            background: var(--bg-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            padding: 40px 32px;
+            border-radius: var(--radius);
+            background: var(--surface);
+            transition: all 0.4s var(--transition);
+        }
+
+        .testimonial-card:hover {
+            box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+        }
+
+        .testimonial-quote {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 28px;
+            font-weight: 400;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e8e8ed, #d2d2d7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .testimonial-info h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .testimonial-info span {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-section {
+            text-align: center;
+            padding: 160px 24px;
+        }
+
+        .contact-section h2 {
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            font-size: 21px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-email {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.3s;
+            letter-spacing: -0.01em;
+        }
+
+        .contact-email:hover {
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--text-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 1px solid var(--divider);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s var(--transition);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+            .work-card:nth-child(3) {
+                grid-column: span 1;
+                aspect-ratio: 4/3;
+            }
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            .about-image {
+                aspect-ratio: 16/9;
+            }
+            .stats-row {
+                gap: 24px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .section {
+                padding: 80px 24px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-cta-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            .btn-primary, .btn-secondary {
+                justify-content: center;
+            }
+            .work-card-overlay {
+                opacity: 1;
+                transform: translateY(0);
+                padding: 24px;
+            }
+            .work-card-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">陈墨</a>
+            <ul class="nav-links">
+                <li><a href="#works">作品</a></li>
+                <li><a href="#services">服务</a></li>
+                <li><a href="#about">关于</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+            <button class="nav-cta" onclick="scrollToSection('contact')">开始合作</button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            目前可接受新项目
+        </div>
+        <h1>
+            <span class="gradient-text">用设计</span><br>
+            讲述品牌故事
+        </h1>
+        <p class="hero-subtitle">
+            独立平面设计师，专注于品牌识别、视觉系统与数字体验设计。为初创公司与成熟品牌创造有意义的视觉语言。
+        </p>
+        <div class="hero-cta-group">
+            <a href="#works" class="btn-primary">浏览作品 →</a>
+            <a href="#contact" class="btn-secondary">了解更多 ↓</a>
+        </div>
+        <div class="hero-scroll-hint">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Works -->
+    <section class="section" id="works">
+        <div class="section-header reveal">
+            <p class="section-label">精选作品</p>
+            <h2 class="section-title">每一个项目<br>都是一次对话</h2>
+            <p class="section-desc">从品牌策略到视觉落地，为不同行业的客户打造独特的视觉体验。</p>
+        </div>
+        <div class="works-grid">
+            <div class="work-card reveal" onclick="openWork('brand')">
+                <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&q=80" alt="品牌设计" class="work-card-image">
+                <div class="work-card-overlay">
+                    <div class="work-card-tag">品牌识别</div>
+                    <div class="work-card-title">青禾茶事</div>
+                    <div class="work-card-desc">新中式茶饮品牌全案设计</div>
+                </div>
+            </div>
+            <div class="work-card reveal" onclick="openWork('web')">
+                <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80" alt="网页设计" class="work-card-image">
+                <div class="work-card-overlay">
+                    <div class="work-card-tag">数字体验</div>
+                    <div class="work-card-title">云境科技</div>
+                    <div class="work-card-desc">SaaS 产品官网与界面系统</div>
+                </div>
+            </div>
+            <div class="work-card reveal" onclick="openWork('packaging')">
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1200&q=80" alt="包装设计" class="work-card-image">
+                <div class="work-card-overlay">
+                    <div class="work-card-tag">包装设计</div>
+                    <div class="work-card-title">山岚咖啡</div>
+                    <div class="work-card-desc">精品咖啡品牌包装与视觉系统</div>
+                </div>
+            </div>
+            <div class="work-card reveal" onclick="openWork('editorial')">
+                <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&q=80" alt="编辑设计" class="work-card-image">
+                <div class="work-card-overlay">
+                    <div class="work-card-tag">编辑设计</div>
+                    <div class="work-card-title">《边界》杂志</div>
+                    <div class="work-card-desc">独立艺术杂志版式与装帧设计</div>
+                </div>
+            </div>
+            <div class="work-card reveal" onclick="openWork('motion')">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" alt="动态设计" class="work-card-image">
+                <div class="work-card-overlay">
+                    <div class="work-card-tag">动态视觉</div>
+                    <div class="work-card-title">流光音乐节</div>
+                    <div class="work-card-desc">主视觉与动态海报设计</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services-section" id="services">
+        <div class="section">
+            <div class="section-header reveal">
+                <p class="section-label">服务范围</p>
+                <h2 class="section-title">不只是设计<br>更是策略</h2>
+                <p class="section-desc">从理解品牌内核出发，提供系统性的视觉解决方案。</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">🎯</div>
+                    <h3 class="service-title">品牌识别</h3>
+                    <p class="service-desc">Logo 设计、品牌视觉系统、品牌指南手册，建立一致且可延展的品牌语言。</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">🖥️</div>
+                    <h3 class="service-title">数字体验</h3>
+                    <p class="service-desc">网站设计、App 界面、设计系统，打造流畅且令人愉悦的数字产品体验。</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">📦</div>
+                    <h3 class="service-title">包装与印刷</h3>
+                    <p class="service-desc">产品包装、画册、海报、物料设计，让品牌在物理世界同样出彩。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+        <div class="about-grid">
+            <div class="about-image reveal">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="陈墨">
+            </div>
+            <div class="about-content reveal">
+                <p class="section-label">关于我</p>
+                <h2>设计是<br>解决问题的艺术</h2>
+                <p>
+                    我是陈墨，一名拥有 8 年经验的独立平面设计师。曾任职于顶尖创意机构，服务过从互联网科技到传统消费品的多元客户。
+                </p>
+                <p>
+                    我相信好的设计不仅仅是好看，更要有效——它能传递信息、建立信任、驱动行动。每一个项目，我都从深入理解品牌与受众开始，确保设计决策有据可依。
+                </p>
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-number">8+</div>
+                        <div class="stat-label">年设计经验</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">120+</div>
+                        <div class="stat-label">完成项目</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">40+</div>
+                        <div class="stat-label">合作品牌</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="section">
+            <div class="section-header reveal">
+                <p class="section-label">客户评价</p>
+                <h2 class="section-title">他们这样说</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <p class="testimonial-quote">"陈墨对品牌的理解非常深刻，不仅仅是做视觉，而是真正帮我们梳理了品牌内核。最终的设计方案远超预期。"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">林</div>
+                        <div class="testimonial-info">
+                            <h4>林晓薇</h4>
+                            <span>青禾茶事 创始人</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <p class="testimonial-quote">"合作过程非常顺畅，陈墨总能精准捕捉我们的需求，并在设计中加入我们没想到的巧思。专业且高效。"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">张</div>
+                        <div class="testimonial-info">
+                            <h4>张明远</h4>
+                            <span>云境科技 产品总监</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <p class="testimonial-quote">"从包装到整套视觉系统，陈墨的设计让我们的产品在货架上脱颖而出。销量提升了 35%，设计投资回报率惊人。"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">王</div>
+                        <div class="testimonial-info">
+                            <h4>王思琪</h4>
+                            <span>山岚咖啡 市场负责人</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="reveal">
+            <p class="section-label">开始合作</p>
+            <h2>有想法？<br>聊聊吧</h2>
+            <p>无论是全新品牌打造，还是现有视觉升级，我都很乐意倾听你的需求。</p>
+            <a href="mailto:hello@chenmo.design" class="contact-email">hello@chenmo.design</a>
+            <div class="social-links">
+                <a href="#" class="social-link" title="Dribbble">🏀</a>
+                <a href="#" class="social-link" title="Behance">🎨</a>
+                <a href="#" class="social-link" title="Instagram">📷</a>
+                <a href="#" class="social-link" title="WeChat">💬</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 陈墨设计工作室. 保留所有权利.</p>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth scroll
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Work detail
+        function openWork(name) {
+            const works = {
+                brand: '青禾茶事 — 新中式茶饮品牌全案设计\n\n为这家主打「东方原叶茶」的新锐品牌打造了完整的视觉识别系统，包括品牌策略、Logo 设计、色彩系统、字体规范、包装体系及门店空间导视。',
+                web: '云境科技 — SaaS 产品官网与界面系统\n\n为 B2B 云计算平台设计了全新的官网与产品界面，通过清晰的信息架构和精致的视觉细节，提升了产品的专业感与信任度。',
+                packaging: '山岚咖啡 — 精品咖啡品牌包装与视觉系统\n\n从产地故事出发，为精品咖啡品牌设计了具有辨识度的包装系列，涵盖挂耳、咖啡豆袋、礼盒及周边物料。',
+                editorial: '《边界》杂志 — 独立艺术杂志版式与装帧设计\n\n为季刊艺术杂志设计了全新的版式系统与装帧方案，平衡了艺术表达与阅读体验。',
+                motion: '流光音乐节 — 主视觉与动态海报设计\n\n为年度电子音乐节设计了整套视觉系统，包括主视觉、动态海报、舞台视觉及现场导视。'
+            };
+            alert(works[name] || '项目详情加载中...');
+        }
+
+        // Nav background on scroll
+        const nav = document.querySelector('.nav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.9)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.72)';
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
