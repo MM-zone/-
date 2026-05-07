@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陈墨 — 平面设计师</title>
+    <title>M — 平面设计师</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -39,6 +39,10 @@
             color: var(--text-primary);
             line-height: 1.47059;
             overflow-x: hidden;
+        }
+
+        body.modal-open {
+            overflow: hidden;
         }
 
         /* ===== NAVIGATION ===== */
@@ -365,6 +369,219 @@
             font-weight: 300;
         }
 
+        /* ===== PROJECT MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s var(--transition);
+            padding: 40px 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            max-width: 1000px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s var(--transition);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 10;
+            transition: background 0.3s;
+        }
+
+        .modal-close:hover {
+            background: rgba(0,0,0,0.2);
+        }
+
+        .modal-hero {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .modal-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+        }
+
+        .modal-hero-overlay h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .modal-hero-overlay p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .modal-description {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .modal-gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            cursor: zoom-in;
+            transition: transform 0.3s var(--transition);
+        }
+
+        .modal-gallery img:hover {
+            transform: scale(1.02);
+        }
+
+        .modal-gallery img.full-width {
+            grid-column: span 2;
+            height: 400px;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s var(--transition);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            transform: scale(0.8);
+            transition: transform 0.3s var(--transition);
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 30px; }
+        .lightbox-next { right: 30px; }
+
         /* ===== SERVICES ===== */
         .services-section {
             background: var(--bg-white);
@@ -478,64 +695,6 @@
             font-weight: 500;
         }
 
-        /* ===== TESTIMONIALS ===== */
-        .testimonials-section {
-            background: var(--bg-white);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .testimonial-card {
-            padding: 40px 32px;
-            border-radius: var(--radius);
-            background: var(--surface);
-            transition: all 0.4s var(--transition);
-        }
-
-        .testimonial-card:hover {
-            box-shadow: 0 8px 40px rgba(0,0,0,0.06);
-        }
-
-        .testimonial-quote {
-            font-size: 17px;
-            line-height: 1.6;
-            color: var(--text-primary);
-            margin-bottom: 28px;
-            font-weight: 400;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .testimonial-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #e8e8ed, #d2d2d7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .testimonial-info h4 {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .testimonial-info span {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
         /* ===== CONTACT ===== */
         .contact-section {
             text-align: center;
@@ -632,8 +791,14 @@
                 grid-column: span 1;
                 aspect-ratio: 4/3;
             }
-            .services-grid,
-            .testimonials-grid {
+            .modal-gallery {
+                grid-template-columns: 1fr;
+            }
+            .modal-gallery img.full-width {
+                grid-column: span 1;
+                height: 250px;
+            }
+            .services-grid {
                 grid-template-columns: 1fr;
             }
             .about-grid {
@@ -651,6 +816,15 @@
             }
             .section {
                 padding: 80px 24px;
+            }
+            .modal-hero {
+                height: 250px;
+            }
+            .modal-hero-overlay h2 {
+                font-size: 24px;
+            }
+            .lightbox-nav {
+                display: none;
             }
         }
 
@@ -671,14 +845,18 @@
             .work-card-title {
                 font-size: 18px;
             }
+            .modal-body {
+                padding: 24px;
+            }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="#" class="nav-logo">陈墨</a>
+            <a href="#" class="nav-logo">Mayim</a>
             <ul class="nav-links">
                 <li><a href="#works">作品</a></li>
                 <li><a href="#services">服务</a></li>
@@ -700,7 +878,7 @@
             讲述品牌故事
         </h1>
         <p class="hero-subtitle">
-            独立平面设计师，专注于品牌识别、视觉系统与数字体验设计。为初创公司与成熟品牌创造有意义的视觉语言。
+            我是 M，独立平面设计师，专注于品牌识别、视觉系统与数字体验设计。为初创公司与成熟品牌创造有意义的视觉语言。
         </p>
         <div class="hero-cta-group">
             <a href="#works" class="btn-primary">浏览作品 →</a>
@@ -718,51 +896,79 @@
         <div class="section-header reveal">
             <p class="section-label">精选作品</p>
             <h2 class="section-title">每一个项目<br>都是一次对话</h2>
-            <p class="section-desc">从品牌策略到视觉落地，为不同行业的客户打造独特的视觉体验。</p>
+            <p class="section-desc">从品牌策略到视觉落地，为不同行业的客户打造独特的视觉体验。点击案例查看详情。</p>
         </div>
         <div class="works-grid">
-            <div class="work-card reveal" onclick="openWork('brand')">
+            <div class="work-card reveal" onclick="openProject('brand')">
                 <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&q=80" alt="品牌设计" class="work-card-image">
                 <div class="work-card-overlay">
                     <div class="work-card-tag">品牌识别</div>
                     <div class="work-card-title">青禾茶事</div>
-                    <div class="work-card-desc">新中式茶饮品牌全案设计</div>
+                    <div class="work-card-desc">新中式茶饮品牌全案设计 · 点击查看详情</div>
                 </div>
             </div>
-            <div class="work-card reveal" onclick="openWork('web')">
+            <div class="work-card reveal" onclick="openProject('web')">
                 <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80" alt="网页设计" class="work-card-image">
                 <div class="work-card-overlay">
                     <div class="work-card-tag">数字体验</div>
                     <div class="work-card-title">云境科技</div>
-                    <div class="work-card-desc">SaaS 产品官网与界面系统</div>
+                    <div class="work-card-desc">SaaS 产品官网与界面系统 · 点击查看详情</div>
                 </div>
             </div>
-            <div class="work-card reveal" onclick="openWork('packaging')">
+            <div class="work-card reveal" onclick="openProject('packaging')">
                 <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1200&q=80" alt="包装设计" class="work-card-image">
                 <div class="work-card-overlay">
                     <div class="work-card-tag">包装设计</div>
                     <div class="work-card-title">山岚咖啡</div>
-                    <div class="work-card-desc">精品咖啡品牌包装与视觉系统</div>
+                    <div class="work-card-desc">精品咖啡品牌包装与视觉系统 · 点击查看详情</div>
                 </div>
             </div>
-            <div class="work-card reveal" onclick="openWork('editorial')">
+            <div class="work-card reveal" onclick="openProject('editorial')">
                 <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&q=80" alt="编辑设计" class="work-card-image">
                 <div class="work-card-overlay">
                     <div class="work-card-tag">编辑设计</div>
                     <div class="work-card-title">《边界》杂志</div>
-                    <div class="work-card-desc">独立艺术杂志版式与装帧设计</div>
+                    <div class="work-card-desc">独立艺术杂志版式与装帧设计 · 点击查看详情</div>
                 </div>
             </div>
-            <div class="work-card reveal" onclick="openWork('motion')">
+            <div class="work-card reveal" onclick="openProject('motion')">
                 <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" alt="动态设计" class="work-card-image">
                 <div class="work-card-overlay">
                     <div class="work-card-tag">动态视觉</div>
                     <div class="work-card-title">流光音乐节</div>
-                    <div class="work-card-desc">主视觉与动态海报设计</div>
+                    <div class="work-card-desc">主视觉与动态海报设计 · 点击查看详情</div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Project Modal -->
+    <div class="modal-overlay" id="projectModal" onclick="closeModal(event)">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-hero">
+                <img id="modalHeroImg" src="" alt="">
+                <div class="modal-hero-overlay">
+                    <h2 id="modalTitle">项目标题</h2>
+                    <p id="modalTag">项目标签</p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description" id="modalDesc">项目描述</p>
+                <div class="modal-gallery" id="modalGallery">
+                    <!-- Gallery images injected by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">◀</button>
+        <img id="lightboxImg" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">▶</button>
+    </div>
 
     <!-- Services -->
     <section class="services-section" id="services">
@@ -796,13 +1002,13 @@
     <section class="section" id="about">
         <div class="about-grid">
             <div class="about-image reveal">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="陈墨">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="M">
             </div>
             <div class="about-content reveal">
                 <p class="section-label">关于我</p>
                 <h2>设计是<br>解决问题的艺术</h2>
                 <p>
-                    我是陈墨，一名拥有 8 年经验的独立平面设计师。曾任职于顶尖创意机构，服务过从互联网科技到传统消费品的多元客户。
+                    我是 M，一名拥有 8 年经验的独立平面设计师。曾在顶尖创意机构担任视觉主管，服务过从互联网科技到传统消费品的多元客户。
                 </p>
                 <p>
                     我相信好的设计不仅仅是好看，更要有效——它能传递信息、建立信任、驱动行动。每一个项目，我都从深入理解品牌与受众开始，确保设计决策有据可依。
@@ -825,55 +1031,13 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials-section">
-        <div class="section">
-            <div class="section-header reveal">
-                <p class="section-label">客户评价</p>
-                <h2 class="section-title">他们这样说</h2>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card reveal">
-                    <p class="testimonial-quote">"陈墨对品牌的理解非常深刻，不仅仅是做视觉，而是真正帮我们梳理了品牌内核。最终的设计方案远超预期。"</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">林</div>
-                        <div class="testimonial-info">
-                            <h4>林晓薇</h4>
-                            <span>青禾茶事 创始人</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal">
-                    <p class="testimonial-quote">"合作过程非常顺畅，陈墨总能精准捕捉我们的需求，并在设计中加入我们没想到的巧思。专业且高效。"</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">张</div>
-                        <div class="testimonial-info">
-                            <h4>张明远</h4>
-                            <span>云境科技 产品总监</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal">
-                    <p class="testimonial-quote">"从包装到整套视觉系统，陈墨的设计让我们的产品在货架上脱颖而出。销量提升了 35%，设计投资回报率惊人。"</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">王</div>
-                        <div class="testimonial-info">
-                            <h4>王思琪</h4>
-                            <span>山岚咖啡 市场负责人</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact -->
     <section class="contact-section" id="contact">
         <div class="reveal">
             <p class="section-label">开始合作</p>
             <h2>有想法？<br>聊聊吧</h2>
             <p>无论是全新品牌打造，还是现有视觉升级，我都很乐意倾听你的需求。</p>
-            <a href="mailto:hello@chenmo.design" class="contact-email">hello@chenmo.design</a>
+            <a href="mailto:hello@mayim.design" class="contact-email">hello@mayim.design</a>
             <div class="social-links">
                 <a href="#" class="social-link" title="Dribbble">🏀</a>
                 <a href="#" class="social-link" title="Behance">🎨</a>
@@ -885,10 +1049,143 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2026 陈墨设计工作室. 保留所有权利.</p>
+        <p>© 2026 M Design Studio. 保留所有权利.</p>
     </footer>
 
     <script>
+        // Project data
+        const projects = {
+            brand: {
+                title: '青禾茶事',
+                tag: '品牌识别 · 新中式茶饮',
+                desc: '为这家主打「东方原叶茶」的新锐品牌打造了完整的视觉识别系统。从品牌策略出发，深入挖掘茶文化与现代审美的结合点，设计了包括 Logo、色彩系统、字体规范、包装体系及门店空间导视在内的全套视觉方案。项目历时 3 个月，最终帮助品牌在开业首月获得 10 万+ 社交媒体曝光。',
+                hero: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?w=1200&q=80',
+                gallery: [
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80',
+                    'https://images.unsplash.com/photo-1563822249548-9a72b6353b1e?w=800&q=80',
+                    'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80',
+                    'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80'
+                ]
+            },
+            web: {
+                title: '云境科技',
+                tag: '数字体验 · SaaS 平台',
+                desc: '为 B2B 云计算平台设计了全新的官网与产品界面。通过清晰的信息架构和精致的视觉细节，提升了产品的专业感与信任度。设计系统包含 200+ 组件，覆盖 Web 与移动端，确保产品在不同场景下的一致性体验。上线后用户注册转化率提升 45%。',
+                hero: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1200&q=80',
+                gallery: [
+                    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+                    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+                    'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80',
+                    'https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80'
+                ]
+            },
+            packaging: {
+                title: '山岚咖啡',
+                tag: '包装设计 · 精品咖啡',
+                desc: '从产地故事出发，为精品咖啡品牌设计了具有辨识度的包装系列。设计灵感源自云南高海拔山区的云雾与晨光，通过渐变色与磨砂质感的结合，传达「高山云雾出好茶」的品牌理念。涵盖挂耳、咖啡豆袋、礼盒及周边物料，荣获 2025 年 Pentawards 包装设计奖提名。',
+                hero: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1200&q=80',
+                gallery: [
+                    'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80',
+                    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
+                    'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80',
+                    'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&q=80',
+                    'https://images.unsplash.com/photo-1511537632536-b7a4896840a4?w=800&q=80',
+                    'https://images.unsplash.com/photo-1498804103079-a6351b050096?w=800&q=80'
+                ]
+            },
+            editorial: {
+                title: '《边界》杂志',
+                tag: '编辑设计 · 独立出版',
+                desc: '为季刊艺术杂志设计了全新的版式系统与装帧方案。杂志聚焦当代艺术与设计的交叉领域，每期邀请不同领域的创作者对话。设计平衡了艺术表达与阅读体验，采用特殊纸张与活页装订工艺，让每一期都成为可收藏的艺术品。',
+                hero: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=1200&q=80',
+                gallery: [
+                    'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80',
+                    'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
+                    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80',
+                    'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=800&q=80'
+                ]
+            },
+            motion: {
+                title: '流光音乐节',
+                tag: '动态视觉 · 品牌活动',
+                desc: '为年度电子音乐节设计了整套视觉系统，包括主视觉、动态海报、舞台视觉及现场导视。设计以「光的流动」为核心概念，运用流体渐变与几何切割，创造出迷幻而现代的视觉语言。动态海报在社交媒体上获得 50 万+ 播放量，成为当年最具话题性的音乐节视觉之一。',
+                hero: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80',
+                gallery: [
+                    'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+                    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80',
+                    'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80',
+                    'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&q=80'
+                ]
+            }
+        };
+
+        let currentProject = null;
+        let currentImageIndex = 0;
+        let currentGallery = [];
+
+        // Open project modal
+        function openProject(projectId) {
+            const project = projects[projectId];
+            if (!project) return;
+
+            currentProject = projectId;
+            currentGallery = project.gallery;
+
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalTag').textContent = project.tag;
+            document.getElementById('modalDesc').textContent = project.desc;
+            document.getElementById('modalHeroImg').src = project.hero;
+
+            const galleryContainer = document.getElementById('modalGallery');
+            galleryContainer.innerHTML = project.gallery.map((img, index) => `
+                <img src="${img}" alt="${project.title} - ${index + 1}" 
+                     class="${index === 0 ? 'full-width' : ''}" 
+                     onclick="openLightbox(${index})">
+            `).join('');
+
+            document.getElementById('projectModal').classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+
+        // Close modal
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('projectModal').classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Open lightbox
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightboxImg').src = currentGallery[index];
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        // Close lightbox
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Change image
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) currentImageIndex = currentGallery.length - 1;
+            if (currentImageIndex >= currentGallery.length) currentImageIndex = 0;
+            document.getElementById('lightboxImg').src = currentGallery[currentImageIndex];
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeLightbox();
+            }
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'ArrowRight') changeImage(1);
+            }
+        });
+
         // Scroll reveal
         const revealElements = document.querySelectorAll('.reveal');
 
@@ -911,21 +1208,8 @@
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Work detail
-        function openWork(name) {
-            const works = {
-                brand: '青禾茶事 — 新中式茶饮品牌全案设计\n\n为这家主打「东方原叶茶」的新锐品牌打造了完整的视觉识别系统，包括品牌策略、Logo 设计、色彩系统、字体规范、包装体系及门店空间导视。',
-                web: '云境科技 — SaaS 产品官网与界面系统\n\n为 B2B 云计算平台设计了全新的官网与产品界面，通过清晰的信息架构和精致的视觉细节，提升了产品的专业感与信任度。',
-                packaging: '山岚咖啡 — 精品咖啡品牌包装与视觉系统\n\n从产地故事出发，为精品咖啡品牌设计了具有辨识度的包装系列，涵盖挂耳、咖啡豆袋、礼盒及周边物料。',
-                editorial: '《边界》杂志 — 独立艺术杂志版式与装帧设计\n\n为季刊艺术杂志设计了全新的版式系统与装帧方案，平衡了艺术表达与阅读体验。',
-                motion: '流光音乐节 — 主视觉与动态海报设计\n\n为年度电子音乐节设计了整套视觉系统，包括主视觉、动态海报、舞台视觉及现场导视。'
-            };
-            alert(works[name] || '项目详情加载中...');
-        }
-
         // Nav background on scroll
         const nav = document.querySelector('.nav');
-        let lastScroll = 0;
 
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
@@ -934,7 +1218,6 @@
             } else {
                 nav.style.background = 'rgba(255, 255, 255, 0.72)';
             }
-            lastScroll = currentScroll;
         });
     </script>
 </body>
